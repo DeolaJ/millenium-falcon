@@ -23,3 +23,7 @@ export type PeopleResponseType = {
     previous: string | null;
     results: PeopleType[];
 };
+
+export type ImageMapType = {
+    [key: string]: string;
+};
