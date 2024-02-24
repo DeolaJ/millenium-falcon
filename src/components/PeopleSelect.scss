@@ -1,0 +1,93 @@
+// People Select
+
+.people-select {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    .people-select--display,
+    .people-select---dropdown {
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media (min-width: 400px) {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
+
+.people-select--display {
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+
+    > h2 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    @media (min-width: 400px) {
+        > h2 {
+            font-size: 1.125rem;
+        }
+    }
+}
+
+.people-select--display-list {
+    display: flex;
+    gap: 0.25rem;
+    flex-direction: column-reverse;
+
+    @media (min-width: 400px) {
+        gap: 0.5rem;
+        flex-direction: column;
+    }
+}
+
+.people-select--card-wrapper {
+    position: relative;
+}
+
+.people-select--dropdown-wrapper {
+    margin-top: 1rem;
+    position: relative;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.people-select--dropdown-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.people-select--remove-button {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    z-index: 2;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    @media (min-width: 400px) {
+        left: 100%;
+        top: 0;
+        right: auto;
+        margin-left: 0.25rem;
+        font-size: 24px;
+        color: #1b2028;
+    }
+}

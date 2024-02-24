@@ -2,9 +2,6 @@
 
 .people-dropdown {
     position: relative;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
 }
 
@@ -16,12 +13,6 @@
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.2);
-}
-
-.people-dropdown--title {
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
 }
 
 .people-dropdown--button {

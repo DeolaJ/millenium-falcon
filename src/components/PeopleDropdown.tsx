@@ -195,29 +195,26 @@ function PeopleDropdown({
             )}
 
             {!isDropdownVisible && (
-                <>
-                    <p className="people-dropdown--title">Select {type}s</p>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            if (peopleList?.length !== 0) {
-                                setIsDropdownVisible((prevValue) => !prevValue);
-                            }
-                        }}
-                        aria-haspopup="listbox"
-                        aria-disabled={peopleList?.length === 0}
-                        ref={dropdownButtonRef}
-                        aria-expanded={isDropdownVisible}
-                        className={`people-dropdown--button ${isDropdownVisible ? "active" : ""} ${peopleList?.length === 0 || isLoading ? "disabled" : ""}`}
-                    >
-                        <span>
-                            {selections?.length
-                                ? selections.map((person) => person.name).join(", ")
-                                : `Search ${type?.toLowerCase()}s`}
-                        </span>
-                        {isLoading && <span className="sr-only">Loading</span>}
-                    </button>
-                </>
+                <button
+                    type="button"
+                    onClick={() => {
+                        if (peopleList?.length !== 0) {
+                            setIsDropdownVisible((prevValue) => !prevValue);
+                        }
+                    }}
+                    aria-haspopup="listbox"
+                    aria-disabled={peopleList?.length === 0}
+                    ref={dropdownButtonRef}
+                    aria-expanded={isDropdownVisible}
+                    className={`people-dropdown--button ${isDropdownVisible ? "active" : ""} ${peopleList?.length === 0 || isLoading ? "disabled" : ""}`}
+                >
+                    <span>
+                        {selections?.length
+                            ? selections.map((person) => person.name).join(", ")
+                            : `Search ${type?.toLowerCase()}s`}
+                    </span>
+                    {isLoading && <span className="sr-only">Loading</span>}
+                </button>
             )}
 
             {isDropdownVisible && (
