@@ -1,0 +1,48 @@
+// Pagination
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1;
+    background-color: white;
+    padding: 0.25rem;
+
+    &.flex-end {
+        justify-content: flex-end;
+    }
+
+    @media (min-width: 400px) {
+        padding: 0;
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+        background-color: transparent;
+    }
+}
+
+.pagination--button {
+    border: none;
+    background-color: #2376f3;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+
+    &:hover {
+        background-color: #1059c6;
+    }
+}
+
+.pagination--button-icon {
+    width: 0.7rem;
+    height: 0.7rem;
+
+    &.next-icon {
+        margin-left: 0.5rem;
+    }
+
+    &.previous-icon {
+        margin-right: 0.5rem;
+    }
+}
