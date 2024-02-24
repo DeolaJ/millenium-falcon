@@ -29,7 +29,7 @@ async function fetchPeople(search?: string, page?: number): Promise<PeopleRespon
 
 export default function usePeople(search?: string, page?: number) {
     return useQuery({
-        queryKey: ["people", search || null, page || null],
+        queryKey: ["people", search || "", page || null],
         queryFn: () => fetchPeople(search, page),
         staleTime: Infinity,
     });
