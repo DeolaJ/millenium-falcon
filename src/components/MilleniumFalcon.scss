@@ -1,0 +1,173 @@
+//  Millenium Falcon
+
+.millenium-falcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url("/public/background/blob.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+}
+
+.millenium-falcon-form {
+    min-height: 40vh;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+
+    &.intro-page,
+    &.final-page {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    &.final-page {
+        padding-top: 5rem;
+    }
+
+    @media (min-width: 400px) {
+        min-height: 30vh;
+        overflow: initial;
+
+        &.intro-page,
+        &.final-page {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        &.final-page {
+            padding-top: 2rem;
+        }
+    }
+}
+
+.millenium-falcon-form.intro-page {
+    background-color: #1b2028;
+    mix-blend-mode: screen;
+}
+
+.millenium-falcon--page {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    .millenium-falcon--page-title {
+        color: white;
+        font-weight: 700;
+        font-size: 1.125rem;
+        line-height: 1.3;
+        margin-bottom: 3rem;
+        transform: rotate(-6deg);
+        border: 2px solid white;
+        border-radius: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: fit-content;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0.75rem 1rem;
+    }
+
+    > p {
+        color: white;
+        margin-top: 0.5rem;
+        font-size: 0.55rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .millenium-falcon--page-button {
+        padding: 0.65rem 0.875rem;
+        font-weight: 500;
+        color: #1b2028;
+        background-color: white;
+        font-size: 0.875rem;
+
+        &:hover {
+            background-color: #ddd;
+        }
+    }
+
+    &.is-light-mode {
+        .millenium-falcon--page-title {
+            color: #1b2028;
+            border: 2px solid #1b2028;
+        }
+
+        .millenium-falcon--page-countdown {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1b2028;
+        }
+
+        .millenium-falcon--page-button {
+            color: white;
+            background-color: #1b2028;
+        }
+
+        .millenium-falcon--page-button:hover {
+            color: #ddd;
+        }
+    }
+
+    @media (min-width: 400px) {
+        .millenium-falcon--page-title {
+            font-size: 1.75rem;
+        }
+    }
+
+    @media (min-width: 600px) {
+        .millenium-falcon--page-title {
+            font-size: 2.25rem;
+            margin-bottom: 4rem;
+            padding: 1rem 1.875rem;
+        }
+
+        .millenium-falcon--page-button {
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+        }
+    }
+}
+
+.millenium-falcon--page-button {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.5rem;
+}
+
+.millenium-falcon--page-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.millenium-falcon--page-characters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 4rem;
+
+    @media (min-width: 600px) {
+        margin-top: 2rem;
+    }
+}
+
+.falcon-animation {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
