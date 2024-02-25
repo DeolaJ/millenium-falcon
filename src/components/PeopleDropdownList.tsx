@@ -1,9 +1,14 @@
+import { useContext } from "react";
+
+import MilleniumFalconContext from "./MilleniumFalconContext";
+
 import { PeopleType } from "../types";
 
 type PeopleDropdownProps = {
     searchQuery: string;
     selections: PeopleType[] | null;
     toggleSelection: (selection: PeopleType, isSelected: boolean) => void;
+    isSelectable: boolean;
     peopleList?: PeopleType[];
 };
 
@@ -44,18 +49,35 @@ function PeopleDropdownList({
     searchQuery,
     selections,
     peopleList,
+    isSelectable,
     toggleSelection,
 }: PeopleDropdownProps) {
+    const context = useContext(MilleniumFalconContext);
+    const allSelections = context?.allSelections;
+
     return (peopleList?.length || 0) > 0 ? (
         peopleList?.map((person) => {
+            // Checks if current person has been selected within the current type
             const isSelected = Boolean(
                 selections?.find((selection) => person.name === selection.name),
             );
+            // Checks if current person has been selected in another type
+            const isAllSelected = Boolean(
+                allSelections?.find((selection) => person.name === selection.name),
+            );
+            const isDisabled = !isSelectable || isAllSelected;
             return (
                 <li key={person.name} role="option" aria-selected={isSelected}>
                     <button
-                        onClick={() => toggleSelection(person, isSelected)}
-                        className={isSelected ? "active" : ""}
+                        onClick={() => {
+                            // Disable selection if it's been saved
+                            if (isAllSelected) {
+                                return;
+                            }
+                            toggleSelection(person, isSelected);
+                        }}
+                        className={`${isSelected ? "active" : ""} ${isDisabled ? "disabled" : ""}`}
+                        aria-disabled={isDisabled ? true : false}
                     >
                         {searchQuery
                             ? generateAutocompleteResult(person.name, searchQuery)
