@@ -79,3 +79,43 @@
         margin-bottom: 0.125rem;
     }
 }
+
+.people-card--type {
+    font-size: 0.55rem;
+    color: #1b2028;
+    padding: 0.25rem;
+    border: 1px solid #1b2028;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.2rem 0.45rem;
+}
+
+.people-card.preview {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+    color: #1b2028;
+    background: white;
+    border: 2px solid #1b2028;
+
+    .people-card--image {
+        width: 35px;
+        height: 35px;
+        margin-left: auto;
+        margin-right: auto;
+
+        img {
+            position: static;
+        }
+    }
+
+    .people-card--name {
+        font-size: 0.875rem;
+        margin-bottom: 0.125rem;
+    }
+
+    .people-card--text {
+        font-size: 0.7rem;
+    }
+}

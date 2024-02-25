@@ -1,17 +1,22 @@
-import { PeopleType } from "../types";
+import { MilleniumFalconCharacters, PeopleType } from "../types";
 
 import "./PeopleCard.scss";
 
 export default function PeopleCard({
     people,
     avatarUrl,
+    type,
+    isPreview,
 }: {
     people: PeopleType;
     avatarUrl: string;
+    type?: MilleniumFalconCharacters;
+    isPreview?: boolean;
 }) {
     const { name, birth_year, gender } = people;
     return (
-        <article className="people-card">
+        <article className={`people-card ${isPreview ? "preview" : ""}`}>
+            {type && <span className="people-card--type">{type}</span>}
             <div className="people-card--image">
                 <img src={`/people/${avatarUrl}`} />
             </div>
