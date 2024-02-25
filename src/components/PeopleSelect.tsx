@@ -5,32 +5,36 @@ import { AnimatePresence, motion } from "framer-motion";
 import PeopleDropdown from "./PeopleDropdown";
 import PeopleCard from "./PeopleCard";
 import Pagination from "./Pagination";
+import PeopleSelectPagination from "./PeopleSelectPagination";
 
 import usePeople from "../hooks/usePeople";
 import usePeopleImages from "../hooks/usePeopleImages";
 
-import { PeopleType } from "../types";
+import { MilleniumFalconCharacters, PeopleType } from "../types";
+
+import { selectionRevealVariant } from "../constants/variants";
 
 import "./PeopleSelect.scss";
 
 type PeopleSelectProps = {
-    type: string;
+    type: MilleniumFalconCharacters;
     maxSelections: number;
+    next: () => void;
+    updateForm: (peopleList: PeopleType[], type: MilleniumFalconCharacters) => void;
+    saveSelections: PeopleType[] | null;
+    previous?: () => void;
+    nextText?: string;
+    canPreviousStage?: boolean;
 };
 
-const selectionRevealVariant = {
-    initial: (isEntry: boolean) => ({
-        x: isEntry ? 100 : -100,
-        opacity: 0,
-    }),
-    exit: (isEntry: boolean) => ({
-        x: isEntry ? -100 : 100,
-        opacity: 0,
-    }),
-};
-
-// type, maxSelections
-function PeopleSelect({ type, maxSelections }: PeopleSelectProps) {
+function PeopleSelect({
+    type,
+    maxSelections,
+    next,
+    updateForm,
+    saveSelections,
+    ...props
+}: PeopleSelectProps) {
     const { data: images } = usePeopleImages();
 
     const [page, setPage] = useState(1);
@@ -38,7 +42,8 @@ function PeopleSelect({ type, maxSelections }: PeopleSelectProps) {
     const { data, isFetching } = usePeople(search, page);
 
     const [isEntry, setIsEntry] = useState(true);
-    const [selections, setSelections] = useState<PeopleType[] | null>(null);
+    const [selections, setSelections] = useState<PeopleType[] | null>(saveSelections);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const toggleSelection = useCallback(
         (selection: PeopleType, isSelected?: boolean) => {
@@ -70,11 +75,17 @@ function PeopleSelect({ type, maxSelections }: PeopleSelectProps) {
         setPage(1);
     }, [search]);
 
+    useEffect(() => {
+        if (errorMessage) {
+            setTimeout(() => setErrorMessage(""), 3000);
+        }
+    }, [errorMessage]);
+
     return (
         <section className="people-select">
             {(selections?.length || 0) > 0 && (
                 <div className="people-select--display">
-                    <h2>Selected {type}s</h2>
+                    <h2>Selected {type}</h2>
 
                     <div className="people-select--display-list">
                         <AnimatePresence mode="sync" custom={isEntry}>
@@ -108,10 +119,13 @@ function PeopleSelect({ type, maxSelections }: PeopleSelectProps) {
             )}
 
             <div className="people-select--dropdown-wrapper">
-                <h2 className="people-select--dropdown-title">Select {type}s</h2>
+                <h2 className="people-select--dropdown-title">
+                    Select {maxSelections} {type}
+                </h2>
                 <PeopleDropdown
                     type={type}
                     setSearchString={setSearch}
+                    maxSelections={maxSelections}
                     peopleList={data?.results}
                     isLoading={isFetching}
                     selections={selections}
@@ -127,6 +141,19 @@ function PeopleSelect({ type, maxSelections }: PeopleSelectProps) {
                     />
                 </PeopleDropdown>
             </div>
+
+            <PeopleSelectPagination
+                next={() => {
+                    if (selections?.length !== maxSelections) {
+                        setErrorMessage(`Please select ${maxSelections} ${type}`);
+                        return;
+                    }
+                    updateForm(selections, type);
+                    next();
+                }}
+                errorMessage={errorMessage}
+                {...props}
+            />
         </section>
     );
 }
