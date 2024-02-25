@@ -226,6 +226,11 @@
             background-color: #f1f6fa;
         }
 
+        &.disabled:not(.active) {
+            background-color: #f1f6fa;
+            opacity: 0.3;
+        }
+
         &.active {
             background-color: #2376f3;
             color: white;

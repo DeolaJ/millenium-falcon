@@ -6,6 +6,8 @@ import { FiSearch } from "react-icons/fi";
 import PeopleDropdownList from "./PeopleDropdownList";
 import PeopleLoader from "./PeopleLoader";
 
+import { cleanInput, isLetterKey } from "../utils";
+
 import { PeopleType } from "../types";
 
 import "./PeopleDropdown.scss";
@@ -14,6 +16,7 @@ type PeopleDropdownProps = {
     children: ReactNode;
     type: string;
     isLoading: boolean;
+    maxSelections: number;
     selections: PeopleType[] | null;
     toggleSelection: (selection: PeopleType, isSelected: boolean) => void;
     setSearchString: (query: string) => void;
@@ -21,24 +24,12 @@ type PeopleDropdownProps = {
     className?: string;
 };
 
-function isLetterKey(letter: string) {
-    if (letter.length > 1) return false;
-    const characterCode = letter.charCodeAt(0);
-    // If character code is within the bounds of [A-Z] or [a-z]
-    if (
-        (characterCode >= 65 && characterCode <= 90) ||
-        (characterCode >= 97 && characterCode <= 122)
-    ) {
-        return true;
-    }
-    return false;
-}
-
 function PeopleDropdown({
     children,
     type,
     setSearchString,
     peopleList,
+    maxSelections,
     isLoading,
     selections,
     toggleSelection,
@@ -59,6 +50,8 @@ function PeopleDropdown({
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     // Manages state of local input element
     const [searchQuery, setSearchQuery] = useState("");
+
+    const isSelectable = (selections?.length || 0) < maxSelections;
 
     function setTrapElements() {
         // Get all focusable elements in the dropdown menu body
@@ -99,6 +92,23 @@ function PeopleDropdown({
             setTrapElements();
         }
     }, [isLoading]);
+
+    useEffect(() => {
+        if (!isSelectable) {
+            setIsDropdownVisible(false);
+            (lastActiveELement.current as HTMLElement)?.focus();
+        }
+    }, [isSelectable]);
+
+    useEffect(() => {
+        if (selections) {
+            dropdownMenuRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest",
+            });
+        }
+    }, [selections]);
 
     const handleKeyboard = useRef((e: KeyboardEvent) => {
         const path = e?.composedPath();
@@ -210,8 +220,8 @@ function PeopleDropdown({
                 >
                     <span>
                         {selections?.length
-                            ? selections.map((person) => person.name).join(", ")
-                            : `Search ${type?.toLowerCase()}s`}
+                            ? `${selections.map((person) => person.name).join(", ")} have been selected`
+                            : `Select ${maxSelections} ${type?.toLowerCase()}`}
                     </span>
                     {isLoading && <span className="sr-only">Loading</span>}
                 </button>
@@ -233,25 +243,25 @@ function PeopleDropdown({
                         <div className="people-dropdown--search">
                             <input
                                 type="search"
-                                aria-label={`Search ${type}s`}
-                                placeholder={`Search ${type}s`}
+                                aria-label={`Search ${type}`}
+                                placeholder={`Search ${type}`}
                                 className="people-dropdown--input"
                                 ref={dropdownInputRef}
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                onBlur={(e) => setSearchQuery(e.target.value)}
+                                onChange={(e) => setSearchQuery(cleanInput(e.target.value))}
+                                onBlur={(e) => setSearchQuery(cleanInput(e.target.value))}
                             />
                             <FiSearch className="people-dropdown--icon" aria-hidden />
                         </div>
 
                         <p className="sr-only" id="dropdown--list">
-                            {`${type}'s list.`}
+                            {`${type} list.`}
                         </p>
 
                         <ul
                             className="people-dropdown--list"
                             role="listbox"
-                            aria-label="dropdown-list"
+                            aria-label={`Select ${maxSelections} ${type}`}
                             tabIndex={0}
                             ref={dropdownListRef}
                         >
@@ -261,6 +271,7 @@ function PeopleDropdown({
                                     searchQuery={searchQuery}
                                     selections={selections}
                                     peopleList={peopleList}
+                                    isSelectable={isSelectable}
                                     toggleSelection={toggleSelection}
                                 />
                             )}
