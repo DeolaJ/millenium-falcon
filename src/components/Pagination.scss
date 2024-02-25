@@ -46,3 +46,37 @@
         margin-right: 0.5rem;
     }
 }
+
+.pagination--error {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    p {
+        font-size: 0.75rem;
+        color: red;
+    }
+}
+
+.people-select--pagination--wrapper {
+    position: relative;
+    padding-top: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .pagination {
+        background-color: transparent;
+    }
+
+    .pagination--button {
+        padding: 0.65rem 0.875rem;
+        background-color: #1b2028;
+        color: white;
+        font-size: 0.875rem;
+
+        &:hover {
+            color: #ddd;
+        }
+    }
+}
