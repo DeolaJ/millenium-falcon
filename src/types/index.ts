@@ -27,3 +27,10 @@ export type PeopleResponseType = {
 export type ImageMapType = {
     [key: string]: string;
 };
+
+export type MilleniumFalconFormType = {
+    "crew members": PeopleType[] | null;
+    passengers: PeopleType[] | null;
+};
+
+export type MilleniumFalconCharacters = keyof MilleniumFalconFormType;
