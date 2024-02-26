@@ -201,16 +201,7 @@
         padding-bottom: 0.25rem;
     }
 
-    li p {
-        margin: 0;
-        color: #4e555b;
-        font-size: 0.95rem;
-        padding: 0.625rem;
-        display: flex;
-        align-items: center;
-    }
-
-    button {
+    li {
         color: #4e555b;
         width: 100%;
         font-size: 0.875rem;
@@ -246,18 +237,11 @@
         height: auto;
         border-radius: 8px;
 
-        li p {
-            font-size: 0.875rem;
-            color: #4e555b;
-            margin: 0;
-            height: auto;
-        }
-
-        li:last-child button {
+        li:last-child {
             border-radius: 0 0 8px 8px;
         }
 
-        button {
+        li {
             padding: 0.625rem;
             white-space: nowrap;
             max-width: 100%;

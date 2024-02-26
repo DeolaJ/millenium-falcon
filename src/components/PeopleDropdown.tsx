@@ -56,7 +56,7 @@ function PeopleDropdown({
     function setTrapElements() {
         // Get all focusable elements in the dropdown menu body
         const allFocusableElements = dropdownMenuRef.current?.querySelectorAll(
-            'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]',
+            'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"], li[role="option"]',
         );
         // Set the first and last focusable elements
         firstTrapRef.current = allFocusableElements?.[0] || null;
@@ -151,10 +151,18 @@ function PeopleDropdown({
 
         // Keyboard Actions in Dropdown List
         if (path.includes(dropdownListRef?.current as HTMLElement)) {
+            // Spacebar and Enter button select the list item
+            if (e.key === "Spacebar" || e.key === " " || e.key === "Enter") {
+                const currentListItem = e.target as HTMLElement;
+                if (!currentListItem) {
+                    return;
+                }
+                currentListItem.click();
+            }
             // Up arrow key aids navigation up the list
             if (e.key === "ArrowUp") {
-                const currentListItem = (e.target as HTMLElement)?.parentNode;
-                const previousOption = currentListItem?.previousSibling?.childNodes[0];
+                const currentListItem = e.target as HTMLElement;
+                const previousOption = currentListItem?.previousSibling;
                 if (!previousOption) {
                     return;
                 }
@@ -163,8 +171,8 @@ function PeopleDropdown({
             }
             // Down arrow key aids navigation down the list
             if (e.key === "ArrowDown") {
-                const currentListItem = (e.target as HTMLElement)?.parentNode;
-                const nextOption = currentListItem?.nextSibling?.childNodes[0];
+                const currentListItem = e.target as HTMLElement;
+                const nextOption = currentListItem?.nextSibling;
                 if (!nextOption) {
                     return;
                 }
@@ -254,15 +262,16 @@ function PeopleDropdown({
                             <FiSearch className="people-dropdown--icon" aria-hidden />
                         </div>
 
-                        <p className="sr-only" id="dropdown--list">
-                            {`${type} list.`}
+                        <p className="sr-only" id={`dropdown--list-${type}`}>
+                            {`${type} dropdown list.`}
                         </p>
 
                         <ul
                             className="people-dropdown--list"
                             role="listbox"
                             aria-label={`Select ${maxSelections} ${type}`}
-                            tabIndex={0}
+                            tabIndex={-1}
+                            aria-labelledby={`dropdown--list-${type}`}
                             ref={dropdownListRef}
                         >
                             {isLoading && <PeopleLoader />}
