@@ -13,8 +13,8 @@ export type PeopleType = {
     starships: string[];
     vehicles: string[];
     url: string;
-    created: Date;
-    edited: Date;
+    created: string;
+    edited: string;
 };
 
 export type PeopleResponseType = {
