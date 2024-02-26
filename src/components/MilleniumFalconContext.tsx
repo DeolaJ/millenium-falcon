@@ -2,10 +2,10 @@ import { createContext } from "react";
 
 import { PeopleType } from "../types";
 
-type MilleniumFalconType = {
+export type MilleniumFalconContextType = {
     allSelections: PeopleType[];
 };
 
-const MilleniumFalconContext = createContext<MilleniumFalconType | null>(null);
+const MilleniumFalconContext = createContext<MilleniumFalconContextType | null>(null);
 
 export default MilleniumFalconContext;

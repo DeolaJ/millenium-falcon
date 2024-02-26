@@ -20,10 +20,10 @@ function MilleniumFalconOutro({
     const [counter, setCounter] = useState(5);
     const [isRocketAnimating, setIsRocketAnimating] = useState(false);
     const [isLaunched, setIsLaunched] = useState(false);
-    const [timerId, setTimerId] = useState<number>();
+    const [timerId, setTimerId] = useState<NodeJS.Timeout>();
 
     const startCountdown = useCallback(() => {
-        let timerId = setInterval(() => {
+        let timerId: NodeJS.Timeout = setInterval(() => {
             setCounter((prevCounter) => {
                 if (prevCounter === 1) {
                     clearInterval(timerId);
