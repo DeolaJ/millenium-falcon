@@ -67,29 +67,29 @@ function PeopleDropdownList({
             );
             const isDisabled = !isSelectable || isAllSelected;
             return (
-                <li key={person.name} role="option" aria-selected={isSelected}>
-                    <button
-                        onClick={() => {
-                            // Disable selection if it's been saved
-                            if (isAllSelected) {
-                                return;
-                            }
-                            toggleSelection(person, isSelected);
-                        }}
-                        className={`${isSelected ? "active" : ""} ${isDisabled ? "disabled" : ""}`}
-                        aria-disabled={isDisabled ? true : false}
-                    >
-                        {searchQuery
-                            ? generateAutocompleteResult(person.name, searchQuery)
-                            : person.name}
-                    </button>
+                <li
+                    key={person.name}
+                    tabIndex={0}
+                    role="option"
+                    aria-selected={isSelected}
+                    onClick={() => {
+                        // Disable selection if current person has been been saved or If current person hasn't been selected and we can't add more selections
+                        if (isAllSelected || (!isSelected && !isSelectable)) {
+                            return;
+                        }
+                        toggleSelection(person, isSelected);
+                    }}
+                    className={`${isSelected ? "active" : ""} ${isDisabled ? "disabled" : ""}`}
+                    aria-disabled={isDisabled ? true : false}
+                >
+                    {searchQuery
+                        ? generateAutocompleteResult(person.name, searchQuery)
+                        : person.name}
                 </li>
             );
         })
     ) : (
-        <li>
-            <p>No results found</p>
-        </li>
+        <li>No results found</li>
     );
 }
 
