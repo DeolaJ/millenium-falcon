@@ -27,7 +27,10 @@ function MilleniumFalconForm() {
         [milleniumFalcon],
     );
 
-    function updateMilleniumFalcon(peopleList: PeopleType[], type: MilleniumFalconCharacters) {
+    function updateMilleniumFalcon(
+        peopleList: PeopleType[] | null,
+        type: MilleniumFalconCharacters,
+    ) {
         setMilleniumFalcon((prevMilleniumFalcon) => ({
             ...prevMilleniumFalcon,
             [type]: peopleList,
@@ -117,6 +120,7 @@ function MilleniumFalconForm() {
                                 saveSelections={milleniumFalcon["passengers"]}
                                 next={next}
                                 previous={previous}
+                                previousText="Edit crew"
                                 nextText="Let's take off"
                                 canPreviousStage
                             />
