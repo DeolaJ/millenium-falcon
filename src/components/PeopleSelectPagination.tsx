@@ -4,6 +4,7 @@ import "./Pagination.scss";
 
 function PeopleSelectPagination({
     nextText,
+    previousText,
     canPreviousStage,
     next,
     previous,
@@ -13,6 +14,7 @@ function PeopleSelectPagination({
     previous?: () => void;
     canPreviousStage?: boolean;
     nextText?: string;
+    previousText?: string;
     errorMessage?: string;
 }) {
     return (
@@ -33,7 +35,7 @@ function PeopleSelectPagination({
                             className="pagination--button-icon previous-icon"
                             aria-hidden
                         />
-                        Previous
+                        {previousText || "Previous"}
                     </button>
                 )}
 
