@@ -6,6 +6,7 @@ Build your team to protect the galaxy with 4 crew members and 6 passengers.
 
 ### Getting Started
 
+    git clone https://github.com/DeolaJ/millenium-falcon.git
     cd millenium-falcon
     npm install
 
