@@ -240,7 +240,7 @@ function PeopleDropdown({
                     <div className="people-dropdown--menu" ref={dropdownMenuRef}>
                         <button
                             type="button"
-                            className="people-dropdown--close-button"
+                            className="people-dropdown--close-button button-sr-only"
                             ref={closeButtonRef}
                             onClick={() => setIsDropdownVisible(false)}
                             aria-label="Close dropdown menu"
