@@ -74,7 +74,7 @@ function PeopleDropdownList({
                     aria-selected={isSelected}
                     onClick={() => {
                         // Disable selection if current person has been been saved or If current person hasn't been selected and we can't add more selections
-                        if (isAllSelected || (!isSelected && !isSelectable)) {
+                        if ((isAllSelected && !isSelected) || (!isSelected && !isSelectable)) {
                             return;
                         }
                         toggleSelection(person, isSelected);

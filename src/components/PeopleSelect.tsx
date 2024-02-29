@@ -20,10 +20,11 @@ type PeopleSelectProps = {
     type: MilleniumFalconCharacters;
     maxSelections: number;
     next: () => void;
-    updateForm: (peopleList: PeopleType[], type: MilleniumFalconCharacters) => void;
+    updateForm: (peopleList: PeopleType[] | null, type: MilleniumFalconCharacters) => void;
     saveSelections: PeopleType[] | null;
     previous?: () => void;
     nextText?: string;
+    previousText?: string;
     canPreviousStage?: boolean;
 };
 
@@ -80,6 +81,10 @@ function PeopleSelect({
             setTimeout(() => setErrorMessage(""), 3000);
         }
     }, [errorMessage]);
+
+    useEffect(() => {
+        updateForm(selections?.length ? selections : null, type);
+    }, [selections]);
 
     return (
         <section className="people-select">
@@ -148,7 +153,6 @@ function PeopleSelect({
                         setErrorMessage(`Please select ${maxSelections} ${type}`);
                         return;
                     }
-                    updateForm(selections, type);
                     next();
                 }}
                 errorMessage={errorMessage}
