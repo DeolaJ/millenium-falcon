@@ -2,6 +2,8 @@
 
 Build your team to protect the galaxy with 4 crew members and 6 passengers.
 
+This project was done in 4 days as a challenge.
+
 ## Instructions
 
 ### Getting Started
@@ -38,9 +40,9 @@ To generate build files for production,
 
     npm run build
 
-## Key decision
+## Key Decisions
 
-- Chose React Query to handle server state because of caching. I should have used useInfiniteQuery instead of useQuery, but had some issues figuring it out on time to complete the project.
+- Chose React Query to handle server state because of caching. I should have used useInfiniteQuery instead of useQuery, but had some issues figuring it out on time to complete the project within 5 days.
 - Opted not to use a CSS library or framework to build this to make the project lean, but this cost me time.
 - Opted to attach images to the project using a name map which was generated from the API. However, I opted to save a local version for performance benefits.
 - Chose to use context to manage all the saved selections to avoid passing this down from the Millenium falcon form to the Dropdown list items.
@@ -54,4 +56,4 @@ To generate build files for production,
 - I would have tested the project more for accessibility standards
 - I would have used a simpler animation for the rocket launch to avoid importing the lottie-player library
 - I would have had time to optimize the performance of the project
-- I would have cleaned up my types
+- I would have cleaned up my types and classes
