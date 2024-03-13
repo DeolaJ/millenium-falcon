@@ -12,9 +12,13 @@ type PeopleDropdownProps = {
     peopleList?: PeopleType[];
 };
 
-const generateAutocompleteResult = (name: string, query: string) => {
+function generateAutocompleteResult(name: string, query: string) {
     const queryIndex = name?.toLowerCase().indexOf(query?.toLowerCase().trim());
-    // If search paramater is at the beginning of the name
+    // If search parameter does not exist
+    if (queryIndex === -1) {
+        return name;
+    }
+    // If search parameter is at the beginning of the name
     if (queryIndex === 0) {
         return (
             <>
@@ -23,7 +27,7 @@ const generateAutocompleteResult = (name: string, query: string) => {
             </>
         );
     }
-    // If search paramater is at the end of the name string
+    // If search parameter is at the end of the name string
     if (queryIndex === name.length - query.length) {
         return (
             <>
@@ -42,8 +46,7 @@ const generateAutocompleteResult = (name: string, query: string) => {
             </>
         );
     }
-    return name;
-};
+}
 
 function PeopleDropdownList({
     searchQuery,
