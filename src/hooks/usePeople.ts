@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { PeopleResponseType } from "../types";
 
-const PEOPLE_BASE_URL = "https://swapi.dev/api/people/";
+const API_BASE_URL = import.meta.env.VITE_APP_SWAPI_API;
+const PEOPLE_BASE_URL = `${API_BASE_URL}/api/people/`;
 
 function getQueryUrl(search?: string, page?: number) {
     if (search && page) {

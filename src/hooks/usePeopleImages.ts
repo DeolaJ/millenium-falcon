@@ -4,7 +4,8 @@ import { ImageMapType, PeopleResponseType, PeopleType } from "../types";
 
 import { images } from "../constants/images";
 
-const PEOPLE_BASE_URL = "https://swapi.dev/api/people/";
+const API_BASE_URL = import.meta.env.VITE_SOME_KEY;
+const PEOPLE_BASE_URL = `${API_BASE_URL}/api/people/`;
 
 function generateImageMap(peopleList: PeopleType[]) {
     return peopleList.reduce((imageMap, person, index) => {
