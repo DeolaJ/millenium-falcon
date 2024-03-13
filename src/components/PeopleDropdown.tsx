@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, ReactNode } from "react";
+import { useRef, useState, useEffect, ReactNode, PropsWithChildren } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { IoIosCloseCircle } from "react-icons/io";
 import { FiSearch } from "react-icons/fi";
@@ -35,7 +35,7 @@ function PeopleDropdown({
     toggleSelection,
     className,
 }: PeopleDropdownProps) {
-    const OuterOverlay = useRef<HTMLDivElement>(null);
+    const outerOverlay = useRef<HTMLDivElement>(null);
     const dropdownOverlayRef = useRef<HTMLDivElement>(null);
     const dropdownButtonRef = useRef<HTMLButtonElement>(null);
     const dropdownMenuRef = useRef<HTMLDivElement>(null);
@@ -68,6 +68,11 @@ function PeopleDropdown({
         setSearchString(searchString);
     }, 800);
 
+    function closeDropdown() {
+        setSearchQuery("");
+        setIsDropdownVisible(false);
+    }
+
     useEffect(() => {
         const dropdownOverlay = dropdownOverlayRef.current;
         // Focus on input when the dropdown opens
@@ -78,7 +83,6 @@ function PeopleDropdown({
             return;
         }
         dropdownButtonRef.current?.focus();
-        setSearchString("");
     }, [isDropdownVisible]);
 
     useEffect(() => {
@@ -95,6 +99,7 @@ function PeopleDropdown({
 
     useEffect(() => {
         if (!isSelectable) {
+            setSearchQuery("");
             setIsDropdownVisible(false);
             (lastActiveELement.current as HTMLElement)?.focus();
         }
@@ -114,7 +119,7 @@ function PeopleDropdown({
         const path = e?.composedPath();
         // Escape button closes the dropdown overlay
         if (e.key === "Esc" || e.key === "Escape") {
-            setIsDropdownVisible(false);
+            closeDropdown();
             return;
         }
 
@@ -183,8 +188,8 @@ function PeopleDropdown({
 
     const closeOuter = useRef((e: MouseEvent) => {
         // Close dropdown is area outside the dropdown is clicked
-        if (e.target === OuterOverlay.current) {
-            setIsDropdownVisible(false);
+        if (e.target === outerOverlay.current) {
+            closeDropdown();
             (lastActiveELement.current as HTMLElement)?.focus();
         }
     });
@@ -209,7 +214,7 @@ function PeopleDropdown({
     return (
         <div className={`people-dropdown ${className}`}>
             {isDropdownVisible && (
-                <div className="people-dropdown--outer-overlay" ref={OuterOverlay} />
+                <div className="people-dropdown--outer-overlay" ref={outerOverlay} />
             )}
 
             {!isDropdownVisible && (
@@ -242,7 +247,7 @@ function PeopleDropdown({
                             type="button"
                             className="people-dropdown--close-button button-sr-only"
                             ref={closeButtonRef}
-                            onClick={() => setIsDropdownVisible(false)}
+                            onClick={closeDropdown}
                             aria-label="Close dropdown menu"
                         >
                             <IoIosCloseCircle />
@@ -274,8 +279,10 @@ function PeopleDropdown({
                             aria-labelledby={`dropdown--list-${type}`}
                             ref={dropdownListRef}
                         >
-                            {isLoading && <PeopleLoader />}
-                            {!isLoading && peopleList && (
+                            <PeopleDropdownListWrapper
+                                isLoading={isLoading}
+                                peopleList={peopleList}
+                            >
                                 <PeopleDropdownList
                                     searchQuery={searchQuery}
                                     selections={selections}
@@ -283,7 +290,7 @@ function PeopleDropdown({
                                     isSelectable={isSelectable}
                                     toggleSelection={toggleSelection}
                                 />
-                            )}
+                            </PeopleDropdownListWrapper>
                         </ul>
                         {children}
                     </div>
@@ -291,6 +298,22 @@ function PeopleDropdown({
             )}
         </div>
     );
+}
+
+function PeopleDropdownListWrapper({
+    isLoading,
+    peopleList,
+    children,
+}: PropsWithChildren<{ isLoading: boolean; peopleList?: PeopleType[] }>) {
+    if (isLoading) {
+        return <PeopleLoader />;
+    }
+
+    if (!peopleList) {
+        return <li>Error loading the API results</li>;
+    }
+
+    return children;
 }
 
 export default PeopleDropdown;
