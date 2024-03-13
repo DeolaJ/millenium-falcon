@@ -59,7 +59,7 @@
         position: absolute;
         width: 100%;
         height: auto;
-        top: 100%;
+        top: 0;
         left: 0;
         bottom: auto;
         background: none;
@@ -94,6 +94,7 @@
     }
 
     @media (min-width: 400px) {
+        position: relative;
         border-top: 0;
         background-color: transparent;
         top: 100%;
