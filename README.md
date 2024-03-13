@@ -12,6 +12,8 @@ This project was done in 4 days as a challenge.
     cd millenium-falcon
     npm install
 
+Create an `env` file based on `env.example`, and input the SWAPI BASE URL - [swapi.dev](https://swapi.dev.com) or [swapi.py4e](https://swapi.py4e.com)
+
 ### Development
 
 To run the local server,
