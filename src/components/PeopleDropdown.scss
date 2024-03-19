@@ -142,7 +142,7 @@
         border-radius: 8px;
         height: 3rem;
         padding: 0.7rem 0.7rem 0.7rem 2rem;
-        font-size: 0.875rem;
+        font-size: 1rem;
         outline: none;
 
         &::placeholder {
@@ -182,10 +182,6 @@
     border-radius: 8px 8px 0 0;
     background-color: white;
 
-    li {
-        width: 100%;
-    }
-
     li.loader {
         height: 34px;
         padding: 0.125rem 0.25rem;
@@ -206,6 +202,7 @@
         color: #4e555b;
         width: 100%;
         font-size: 0.875rem;
+        box-sizing: border-box;
         padding: 0.625rem;
         line-height: 1;
         display: flex;
