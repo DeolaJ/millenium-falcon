@@ -33,7 +33,7 @@
         background-image: linear-gradient(135deg, #752e7c, #734a58 20%, #1b2028 30%, #2c333e 100%);
     }
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         padding: 0.875rem;
         align-items: stretch;
     }
@@ -51,7 +51,7 @@
         width: 100%;
     }
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         width: 65px;
         height: 65px;
     }
@@ -63,7 +63,7 @@
     margin-top: 0;
     margin-bottom: 0.125rem;
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         font-size: 1rem;
         margin-bottom: 0.25rem;
     }
@@ -74,7 +74,7 @@
     margin-top: 0;
     margin-bottom: 0.0625rem;
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         font-size: 0.75rem;
         margin-bottom: 0.125rem;
     }

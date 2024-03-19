@@ -39,7 +39,7 @@
         width: 0.625rem;
     }
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         &.active {
             border-radius: 8px 8px 0 0;
             border-bottom: 0;
@@ -55,7 +55,7 @@
     background-color: rgba(16, 38, 73, 0.6);
     z-index: 5;
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         position: absolute;
         width: 100%;
         height: auto;
@@ -93,7 +93,7 @@
         }
     }
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         position: relative;
         border-top: 0;
         background-color: transparent;
@@ -154,7 +154,7 @@
         }
     }
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         .people-dropdown--icon {
             width: 0.9rem;
             left: 0.7rem;
@@ -230,7 +230,7 @@
         }
     }
 
-    @media (min-width: 400px) {
+    @media (min-width: 500px) {
         max-height: 400px;
         height: auto;
         border-radius: 8px;
