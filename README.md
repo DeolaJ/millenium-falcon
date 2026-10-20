@@ -2,60 +2,73 @@
 
 Build your team to protect the galaxy with 4 crew members and 6 passengers.
 
-This project was done in 4 days as a challenge.
+Millenium Falcon is a small React app for Star Wars fans and anyone who wants a fun, polished team picker. You search the Star Wars characters from the [SWAPI](https://swapi.py4e.com) API, choose 4 crew members and 6 passengers, then watch your team launch with a countdown and rocket animation.
 
-## Instructions
+It started as a 4-day frontend challenge and is now a personal side project. See [ROADMAP.md](ROADMAP.md) for the work ahead.
 
-### Getting Started
+## Features
+
+- Searchable, paginated character dropdowns with keyboard support
+- Duplicate protection: a character picked once is disabled everywhere else
+- Character portraits mapped from the API and served locally for speed
+- Transitions, hover and error states, a countdown and a launch animation
+- Accessibility checks in the unit tests with `jest-axe`
+
+## Built with
+
+- [React 18](https://react.dev) and [TypeScript](https://www.typescriptlang.org)
+- [Vite](https://vitejs.dev) for development and builds
+- [TanStack React Query](https://tanstack.com/query) for server state and caching
+- [Framer Motion](https://www.framer.com/motion/) and [Lottie](https://github.com/LottieFiles/lottie-react) for animation
+- [Sass](https://sass-lang.com) for styles
+- [Jest](https://jestjs.io), [React Testing Library](https://testing-library.com) and [Cypress](https://www.cypress.io) for tests
+- ESLint and Prettier for linting and formatting
+
+## Getting started
+
+You need Node.js 18 or later.
 
     git clone https://github.com/DeolaJ/millenium-falcon.git
     cd millenium-falcon
     npm install
+    cp .env.example .env
 
-Create an `env` file based on `env.example`, and input the SWAPI BASE URL - [swapi.dev](https://swapi.dev.com) or [swapi.py4e](https://swapi.py4e.com)
+In `.env`, set `VITE_APP_SWAPI_API` to a SWAPI base URL, for example `https://swapi.py4e.com` or `https://swapi.dev`.
 
 ### Development
 
-To run the local server,
-
     npm run dev
 
-`Prettier`, `Typescript`, and `Eslint` libraries are used for formating and error checking. Install their corresponding vscode extensions to use with VSCode.
+Install the Prettier, TypeScript and ESLint extensions to get formatting and error checking in VS Code.
 
-### Test
+### Tests
 
-Some unit and integration tests were written using `Jest` and `React testing library`. These tests were not as extensive because of the timeframe.
-
-To run these tests
+Unit and integration tests use Jest and React Testing Library:
 
     npm run test
 
-Some end to end tests were written using `Cypress`. These tests were not as extensive because of the timeframe.
-
-To run these tests
+End-to-end tests use Cypress:
 
     npm run test-end
 
-### Production
-
-To generate build files for production,
+### Production build
 
     npm run build
 
-## Key Decisions
+## Key decisions
 
-- Chose React Query to handle server state because of caching. I should have used useInfiniteQuery instead of useQuery, but had some issues figuring it out on time to complete the project within 5 days.
-- Opted not to use a CSS library or framework to build this to make the project lean, but this cost me time.
-- Opted to attach images to the project using a name map which was generated from the API. However, I opted to save a local version for performance benefits.
-- Chose to use context to manage all the saved selections to avoid passing this down from the Millenium falcon form to the Dropdown list items.
-- Chose to disable selected characters to block duplicates
-- Focused a lot on user experience of the application to make the overall experience great. The transitions, hover states, error states, animations, countdown, and the rocket launch animation.
-- Covered some accessibility concerns around the components I built both with manual testing and unit testing.
+- Chose React Query to handle server state because of caching. `useInfiniteQuery` would suit the paginated list better than `useQuery`; that change is on the roadmap.
+- Opted not to use a CSS library or framework to keep the project lean, at the cost of extra time.
+- Character images are attached using a name map generated from the API, with a local copy saved for performance.
+- React context holds the saved selections, so they don't have to be passed from the form down to every dropdown item.
+- Selected characters are disabled to block duplicates.
+- Focused on the user experience: transitions, hover states, error states, animations, the countdown and the rocket launch.
+- Covered accessibility for the components with manual testing and unit tests.
 
-## If I had more time
+## Roadmap
 
-- I would have created a better theme based on spacing (margin, padding), colors, and sizes using CSS variables
-- I would have tested the project more for accessibility standards
-- I would have used a simpler animation for the rocket launch to avoid importing the lottie-player library
-- I would have had time to optimize the performance of the project
-- I would have cleaned up my types and classes
+Planned work lives in [ROADMAP.md](ROADMAP.md).
+
+## License
+
+[MIT](LICENSE)
